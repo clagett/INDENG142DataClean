@@ -1,12 +1,12 @@
-UCIzip <- "UCIdata.zip"
+# This is just some code to download files from the internet dirctly to preserve URL/reproducibility
 
 if(!file.exists("AMES119URN.csv")){
      fileURL <- "https://fred.stlouisfed.org/graph/fredgraph.csv?chart_type=line&recession_bars=on&log_scales=&bgcolor=%23e1e9f0&graph_bgcolor=%23ffffff&fo=Open+Sans&ts=12&tts=12&txtcolor=%23444444&show_legend=yes&show_axis_titles=yes&drp=0&cosd=1990-01-01&coed=2017-10-01&height=450&stacking=&range=&mode=fred&id=AMES119URN&transformation=lin&nd=1990-01-01&ost=-99999&oet=99999&lsv=&lev=&mma=0&fml=a&fgst=lin&fgsnd=2009-06-01&fq=Monthly&fam=avg&vintage_date=&revision_date=&line_color=%234572a7&line_style=solid&lw=2&scale=left&mark_type=none&mw=2&width=1168"
-     download.file(fileURL, destfile="amesUnemployment.csv", method = "curl")
+     download.file(fileURL, destfile="AMES119URN.csv", method = "curl")
 }
-ames <- read.csv("amesUnemployment.csv")
 
 #------------------------------------------------------------------------------
+# Here is a function that subsets the monthly data that we need, from a 2 column csv file
 
 timeframe <- function(file){
      file$DATE <- as.Date(file$DATE, format= "%Y-%m-%d")
@@ -21,3 +21,6 @@ houseunits <- read.csv("IABP1FH.csv", col.names = c("DATE", "IAHouseUnitPermits"
 a <- merge(amesUnemp, earnwkly, all=TRUE)
 a <- merge(a, houseunits, all=TRUE)
 head(a)
+
+
+
